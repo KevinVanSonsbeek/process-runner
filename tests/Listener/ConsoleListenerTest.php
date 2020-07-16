@@ -86,7 +86,7 @@ final class ConsoleListenerTest extends TestCase
         self::assertSame(100, $consoleListener->getPriority());
     }
 
-    private function createProcess(bool $started, bool $running, ?int $exitCode = null, string $output = '', string $errorOutput = '')
+    private function createProcess(bool $started, bool $running, ?int $exitCode = null, string $output = '', string $errorOutput = ''): Process
     {
         $process = $this->createStub(Process::class);
         $process->method('isStarted')->willReturn($started);
