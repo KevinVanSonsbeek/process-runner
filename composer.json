@@ -1,0 +1,43 @@
+{
+    "name": "nusje2000/process-runner",
+    "description": "A simple package for running multiple processes within a PHP process.",
+    "type": "library",
+    "require": {
+        "php": "^7.2",
+        "symfony/process": "^4.4|^5.0",
+        "symfony/console": "^4.4|^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "phpstan/phpstan": "^0.12.32",
+        "phpstan/phpstan-symfony": "^0.12.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nusje2000\\ParallelProcess\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nusje2000\\ParallelProcess\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpstan": [
+            "vendor/bin/phpstan analyze ./src ./tests --level max"
+        ],
+        "phpunit": [
+            "vendor/bin/phpunit ./tests"
+        ],
+        "example": [
+            "bin/example.php"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nusje2000",
+            "email": "maarten.nusteling@gmail.com"
+        }
+    ]
+}
