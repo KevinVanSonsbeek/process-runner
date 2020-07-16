@@ -30,7 +30,7 @@
             "vendor/bin/phpunit ./tests"
         ],
         "example": [
-            "bin/example.php"
+            "php bin/example.php"
         ]
     },
     "license": "MIT",
