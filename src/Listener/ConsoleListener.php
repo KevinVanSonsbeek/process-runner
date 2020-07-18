@@ -28,7 +28,7 @@ final class ConsoleListener implements ExecutionListener
     protected $outputSections = [];
 
     /**
-     * @var array<int, string>
+     * @var array<int, TaskList>
      */
     protected $taskLists = [];
 

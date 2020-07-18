@@ -25,7 +25,7 @@ final class StaticConsoleListener implements ExecutionListener
     private $priority;
 
     /**
-     * @var array<int, array<TaskList|array<bool>>>
+     * @var array<int, array<TaskList|array<int, array<string, bool>>>>
      */
     private $taskLists;
 
@@ -94,7 +94,7 @@ final class StaticConsoleListener implements ExecutionListener
 
         $changes = [];
         foreach ($taskList->getIterator() as $index => $task) {
-            if (null === $previous || !isset($previous[$index])) {
+            if (!isset($previous[$index])) {
                 $changes[$index] = $task;
 
                 continue;
@@ -111,11 +111,17 @@ final class StaticConsoleListener implements ExecutionListener
         return new TaskList($changes);
     }
 
+    /**
+     * @return array<int, array<string, bool>>
+     */
     private function getPreviousState(TaskList $taskList): array
     {
         $index = spl_object_id($taskList);
 
-        return $this->taskLists[$index]['previous'] ?? [];
+        /** @var array<int, array<string, bool>> $previous */
+        $previous = $this->taskLists[$index]['previous'];
+
+        return $previous;
     }
 
     private function setPreviousState(TaskList $taskList): void
