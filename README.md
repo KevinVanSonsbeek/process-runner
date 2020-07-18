@@ -72,7 +72,7 @@ $executor->addListener($listener);
 ```
 
 #### Creating a listener using the ExecutionListener interface
-Sometimes a listener is to complicated for a simple callback function, in this case you can create your own class that
+Sometimes a listener is too complicated for a simple callback function, in this case you can create your own class that
 implements the ExecutionListener interface to handle the tick.
 ```php
 use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
