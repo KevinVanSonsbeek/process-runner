@@ -121,3 +121,33 @@ Stack trace:
 #0 {main}
   thrown in Command line code on line 1
 ```
+
+#### Using the console listener in situations where the output is logged
+Is some situations (like ci/cd integrations), the output of console commands is logged to files. If this is the case,
+using the default ConsoleLogger would result in output for each process change check (by default 5 times a second).
+For these usecases, you can use the StaticConsoleListener. This listener will only print the changes to the console,
+instead of updating the console output using sections.
+```php
+use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
+use Nusje2000\ParallelProcess\Listener\StaticConsoleListener;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+/** @var ExecutorInterface $executor */
+$executor->addListener(new StaticConsoleListener(new ConsoleOutput(ConsoleOutput::VERBOSITY_NORMAL, true)));
+```
+The output of the listener will look something like this:
+```
+echo "Hello world!" is running
+echo "Hello world!" is successfull
+process name 1 is running
+process name 1 is successfull
+process name 2 is running
+process name 2 is successfull
+process name 3 is running
+process name 3 has failed
+Error output:
+PHP Fatal error:  Uncaught Exception: Some exception message in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+```
