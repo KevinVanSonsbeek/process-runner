@@ -119,7 +119,7 @@ final class StaticConsoleListener implements ExecutionListener
         $index = spl_object_id($taskList);
 
         /** @var array<int, array<string, bool>> $previous */
-        $previous = $this->taskLists[$index]['previous'];
+        $previous = $this->taskLists[$index]['previous'] ?? [];
 
         return $previous;
     }
