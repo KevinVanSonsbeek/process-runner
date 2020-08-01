@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Listener;
+namespace Nusje2000\ProcessRunner\Listener;
 
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\TaskList;
 
 interface ExecutionListener
 {

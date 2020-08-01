@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Tests\Factory;
+namespace Nusje2000\ProcessRunner\Tests\Factory;
 
-use Nusje2000\ParallelProcess\Factory\TaskListFactory;
+use Nusje2000\ProcessRunner\Factory\TaskListFactory;
 use PHPUnit\Framework\TestCase;
 
 final class TaskListFactoryTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Factory;
+namespace Nusje2000\ProcessRunner\Factory;
 
-use Nusje2000\ParallelProcess\Task;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Task;
+use Nusje2000\ProcessRunner\TaskList;
 use Symfony\Component\Process\Process;
 
 final class TaskListFactory

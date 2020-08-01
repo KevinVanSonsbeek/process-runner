@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Executor;
+namespace Nusje2000\ProcessRunner\Executor;
 
 use InvalidArgumentException;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\TaskList;
 
 final class SequentialExecutor extends AbstractExecutor
 {

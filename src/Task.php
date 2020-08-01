@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess;
+namespace Nusje2000\ProcessRunner;
 
 use Symfony\Component\Process\Process;
 

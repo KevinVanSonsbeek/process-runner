@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Tests\Listener;
+namespace Nusje2000\ProcessRunner\Tests\Listener;
 
-use Nusje2000\ParallelProcess\Listener\CallbackListener;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Listener\CallbackListener;
+use Nusje2000\ProcessRunner\TaskList;
 use PHPUnit\Framework\TestCase;
 
 final class CallbackListenerTest extends TestCase

@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nusje2000\\ParallelProcess\\": "src/"
+            "Nusje2000\\ProcessRunner\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nusje2000\\ParallelProcess\\Tests\\": "tests/"
+            "Nusje2000\\ProcessRunner\\Tests\\": "tests/"
         }
     },
     "scripts": {

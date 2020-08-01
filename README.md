@@ -6,8 +6,8 @@ by an `Executor` which takes the commands from each task and runs it.
 ### Creating a TaskList
 The creation of a tasklist can be done manually like this:
 ```php
-use Nusje2000\ParallelProcess\Task;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Task;
+use Nusje2000\ProcessRunner\TaskList;
 use Symfony\Component\Process\Process;
 
 $list = new TaskList([
@@ -17,7 +17,7 @@ $list = new TaskList([
 ```
 Or using the provided factory for simple task lists:
 ```php
-use Nusje2000\ParallelProcess\Factory\TaskListFactory;
+use Nusje2000\ProcessRunner\Factory\TaskListFactory;
 
 $list = TaskListFactory::createFromArray([
     'task name' => 'command argument --option'
@@ -34,8 +34,8 @@ both the sequential and parallel executor.
 #### Using the parallel executor
 The ParallelExecutor runs all the tasks at the same time.
 ```php
-use Nusje2000\ParallelProcess\Executor\ParallelExecutor;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Executor\ParallelExecutor;
+use Nusje2000\ProcessRunner\TaskList;
 
 $executor = new ParallelExecutor();
 $executor->execute(new TaskList([]));
@@ -44,8 +44,8 @@ $executor->execute(new TaskList([]));
 #### Using the sequential executor
 The SequentialExecutor runs all the tasks after each other.
 ```php
-use Nusje2000\ParallelProcess\Executor\SequentialExecutor;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Executor\SequentialExecutor;
+use Nusje2000\ProcessRunner\TaskList;
 
 $executor = new SequentialExecutor();
 $executor->execute(new TaskList([]));
@@ -59,9 +59,9 @@ listener has an onTick function which is called when the child process state is 
 If you want to add a simple listen function to an executor than the CallbackListener can be used. This takes a callback
 as argument and then uses that callback as tick function.
 ```php
-use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
-use Nusje2000\ParallelProcess\Listener\CallbackListener;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Executor\ExecutorInterface;
+use Nusje2000\ProcessRunner\Listener\CallbackListener;
+use Nusje2000\ProcessRunner\TaskList;
 
 $listener = new CallbackListener(static function (TaskList $taskList) {
     echo sprintf('There are %d running tasks.', $taskList->getRunningTasks()->count());
@@ -75,9 +75,9 @@ $executor->addListener($listener);
 Sometimes a listener is too complicated for a simple callback function, in this case you can create your own class that
 implements the ExecutionListener interface to handle the tick.
 ```php
-use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
-use Nusje2000\ParallelProcess\Listener\ExecutionListener;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Executor\ExecutorInterface;
+use Nusje2000\ProcessRunner\Listener\ExecutionListener;
+use Nusje2000\ProcessRunner\TaskList;
 
 class RunningTaskListener implements ExecutionListener
 {
@@ -100,8 +100,8 @@ In most cases the parent process is a command as well. If you want to see the st
 in the output of the parent process, you can add the ConsoleListener to the executor. This will show a list of all the
 tasks with their status and in case of an error, it will show the output and error output of the child process.
 ```php
-use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
-use Nusje2000\ParallelProcess\Listener\ConsoleListener;
+use Nusje2000\ProcessRunner\Executor\ExecutorInterface;
+use Nusje2000\ProcessRunner\Listener\ConsoleListener;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 /** @var ExecutorInterface $executor */
@@ -128,8 +128,8 @@ using the default ConsoleLogger would result in output for each process change c
 For these usecases, you can use the StaticConsoleListener. This listener will only print the changes to the console,
 instead of updating the console output using sections.
 ```php
-use Nusje2000\ParallelProcess\Executor\ExecutorInterface;
-use Nusje2000\ParallelProcess\Listener\StaticConsoleListener;
+use Nusje2000\ProcessRunner\Executor\ExecutorInterface;
+use Nusje2000\ProcessRunner\Listener\StaticConsoleListener;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 /** @var ExecutorInterface $executor */

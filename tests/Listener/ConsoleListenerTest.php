@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Nusje2000\ParallelProcess\Tests\Listener;
+namespace Nusje2000\ProcessRunner\Tests\Listener;
 
-use Nusje2000\ParallelProcess\Listener\ConsoleListener;
-use Nusje2000\ParallelProcess\Task;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Listener\ConsoleListener;
+use Nusje2000\ProcessRunner\Task;
+use Nusje2000\ProcessRunner\TaskList;
 use PHPUnit\Framework\Constraint\IsInstanceOf;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Formatter\OutputFormatterInterface;

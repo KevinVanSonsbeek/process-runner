@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Nusje2000\ParallelProcess\Executor\ParallelExecutor;
-use Nusje2000\ParallelProcess\Executor\SequentialExecutor;
-use Nusje2000\ParallelProcess\Factory\TaskListFactory;
-use Nusje2000\ParallelProcess\Listener\ConsoleListener;
-use Nusje2000\ParallelProcess\Listener\StaticConsoleListener;
-use Nusje2000\ParallelProcess\TaskList;
+use Nusje2000\ProcessRunner\Executor\ParallelExecutor;
+use Nusje2000\ProcessRunner\Executor\SequentialExecutor;
+use Nusje2000\ProcessRunner\Factory\TaskListFactory;
+use Nusje2000\ProcessRunner\Listener\ConsoleListener;
+use Nusje2000\ProcessRunner\Listener\StaticConsoleListener;
+use Nusje2000\ProcessRunner\TaskList;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 $cwd = getcwd();
