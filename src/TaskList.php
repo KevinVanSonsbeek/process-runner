@@ -86,6 +86,9 @@ final class TaskList implements Countable
         });
     }
 
+    /**
+     * @psalm-param callable(Task):boolean $filterFunction
+     */
     public function filter(callable $filterFunction): self
     {
         return new self(array_filter($this->tasks, $filterFunction));

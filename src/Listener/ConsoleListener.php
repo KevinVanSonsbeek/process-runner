@@ -56,7 +56,7 @@ final class ConsoleListener implements ExecutionListener
         $buffer[] = '';
 
         foreach ($taskList->getFailedTasks()->getIterator() as $task) {
-            $buffer[] = sprintf('<error>Task "%s" failed (exit code: %d).</error>', $task->getName(), $task->getProcess()->getExitCode());
+            $buffer[] = sprintf('<error>Task "%s" failed (exit code: %d).</error>', $task->getName(), $task->getProcess()->getExitCode() ?? -1);
 
             $output = $task->getProcess()->getOutput();
             if ('' !== $output) {
@@ -109,7 +109,7 @@ final class ConsoleListener implements ExecutionListener
         }
 
         if ($task->isFailed()) {
-            return sprintf('<error>failed (exit code: %d)</error>', $task->getProcess()->getExitCode());
+            return sprintf('<error>failed (exit code: %d)</error>', $task->getProcess()->getExitCode() ?? -1);
         }
 
         return 'unknown process status';

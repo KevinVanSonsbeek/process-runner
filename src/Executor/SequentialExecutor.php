@@ -39,7 +39,7 @@ final class SequentialExecutor extends AbstractExecutor
                     break;
                 }
 
-                usleep(1000000 / $this->refreshRate);
+                usleep((int) (1000000 / $this->refreshRate));
             }
         }
     }
