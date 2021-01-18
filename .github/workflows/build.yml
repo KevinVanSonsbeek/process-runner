@@ -1,6 +1,6 @@
 name: Build
 
-on: [pull_request, push]
+on: [ pull_request, push ]
 
 jobs:
     build:
@@ -25,6 +25,10 @@ jobs:
             -   name: PHP Stan
                 run: |
                     composer run phpstan
+
+            -   name: Psalm
+                run: |
+                    composer run psalm
 
             -   name: PHP Unit
                 run: |

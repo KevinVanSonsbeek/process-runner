@@ -26,10 +26,13 @@
     },
     "scripts": {
         "phpstan": [
-            "vendor/bin/phpstan analyze ./src ./tests --level max"
+            "vendor/bin/phpstan analyze"
         ],
         "phpunit": [
-            "vendor/bin/phpunit ./tests"
+            "vendor/bin/phpunit"
+        ],
+        "psalm": [
+            "vendor/bin/psalm"
         ],
         "example": [
             "php bin/example.php"
