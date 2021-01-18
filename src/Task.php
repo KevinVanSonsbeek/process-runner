@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace Nusje2000\ProcessRunner;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Process\Process;
 
 final class Task
 {
+    /**
+     * @var UuidInterface
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -20,8 +27,14 @@ final class Task
 
     public function __construct(string $name, Process $process)
     {
+        $this->id = Uuid::uuid4();
         $this->name = $name;
         $this->process = $process;
+    }
+
+    public function getId(): UuidInterface
+    {
+        return $this->id;
     }
 
     public function getName(): string

@@ -7,20 +7,33 @@ namespace Nusje2000\ProcessRunner;
 use ArrayIterator;
 use Countable;
 use Iterator;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class TaskList implements Countable
 {
     /**
+     * @var UuidInterface
+     */
+    private $id;
+
+    /**
      * @var array<Task>
      */
-    protected $tasks;
+    private $tasks;
 
     /**
      * @param array<Task> $tasks
      */
     public function __construct(array $tasks)
     {
+        $this->id = Uuid::uuid4();
         $this->tasks = $tasks;
+    }
+
+    public function getId(): UuidInterface
+    {
+        return $this->id;
     }
 
     /**

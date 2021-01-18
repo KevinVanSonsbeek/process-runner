@@ -15,22 +15,17 @@ final class ConsoleListener implements ExecutionListener
     /**
      * @var ConsoleOutputInterface
      */
-    protected $output;
+    private $output;
 
     /**
      * @var int
      */
-    protected $priority;
+    private $priority;
 
     /**
-     * @var array<int, ConsoleSectionOutput>
+     * @var array<string, ConsoleSectionOutput>
      */
-    protected $outputSections = [];
-
-    /**
-     * @var array<int, TaskList>
-     */
-    protected $taskLists = [];
+    private $outputSections = [];
 
     /**
      * @param bool $configureFormatter If true, the formatter will be configured with default output styling.
@@ -89,18 +84,12 @@ final class ConsoleListener implements ExecutionListener
 
     private function getOutputSection(TaskList $taskList): ConsoleSectionOutput
     {
-        $hash = spl_object_id($taskList);
-
-        if (!in_array($taskList, $this->taskLists, true)) {
-            $this->taskLists[] = $taskList;
-        }
-
-        if (isset($this->outputSections[$hash])) {
-            return $this->outputSections[$hash];
+        if (isset($this->outputSections[$taskList->getId()->toString()])) {
+            return $this->outputSections[$taskList->getId()->toString()];
         }
 
         $section = $this->output->section();
-        $this->outputSections[$hash] = $section;
+        $this->outputSections[$taskList->getId()->toString()] = $section;
 
         return $section;
     }

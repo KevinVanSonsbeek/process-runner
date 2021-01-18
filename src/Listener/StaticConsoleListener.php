@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Nusje2000\ProcessRunner\Listener;
 
-use Nusje2000\ProcessRunner\Task;
 use Nusje2000\ProcessRunner\TaskList;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
@@ -25,9 +24,9 @@ final class StaticConsoleListener implements ExecutionListener
     private $priority;
 
     /**
-     * @var array<int, array<TaskList|array<int, array<string, bool>>>>
+     * @var array<string, array<string, array{completed: bool, running: bool}>>
      */
-    private $taskLists;
+    private $states = [];
 
     /**
      * @param bool $configureFormatter If true, the formatter will be configured with default output styling.
@@ -93,16 +92,15 @@ final class StaticConsoleListener implements ExecutionListener
         $previous = $this->getPreviousState($taskList);
 
         $changes = [];
-        foreach ($taskList->getIterator() as $index => $task) {
-            if (!isset($previous[$index])) {
-                $changes[$index] = $task;
+        foreach ($taskList->getIterator() as $task) {
+            if (!isset($previous[$task->getId()->toString()])) {
+                $changes[] = $task;
 
                 continue;
             }
 
             /** @var array<bool> $previousTask */
-            $previousTask = $previous[$index];
-
+            $previousTask = $previous[$task->getId()->toString()];
             if ($previousTask['completed'] !== $task->isCompleted() || $previousTask['running'] !== $task->isRunning()) {
                 $changes[] = $task;
             }
@@ -112,31 +110,24 @@ final class StaticConsoleListener implements ExecutionListener
     }
 
     /**
-     * @return array<int, array<string, bool>>
+     * @return array<string, array{completed: bool, running: bool}>
      */
     private function getPreviousState(TaskList $taskList): array
     {
-        $index = spl_object_id($taskList);
-
-        /** @var array<int, array<string, bool>> $previous */
-        $previous = $this->taskLists[$index]['previous'] ?? [];
-
-        return $previous;
+        return $this->states[$taskList->getId()->toString()] ?? [];
     }
 
     private function setPreviousState(TaskList $taskList): void
     {
-        $index = spl_object_id($taskList);
+        $state = [];
+        foreach ($taskList->getIterator() as $task) {
+            $state[$task->getId()->toString()] = [
+                'completed' => $task->isCompleted(),
+                'running' => $task->isRunning(),
+            ];
+        }
 
-        $this->taskLists[$index] = [
-            'current' => $taskList,
-            'previous' => array_map(static function (Task $task): array {
-                return [
-                    'completed' => $task->isCompleted(),
-                    'running' => $task->isRunning(),
-                ];
-            }, iterator_to_array($taskList->getIterator())),
-        ];
+        $this->states[$taskList->getId()->toString()] = $state;
     }
 
     private function prepareProcessOutput(string $output): string
