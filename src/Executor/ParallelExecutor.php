@@ -40,6 +40,7 @@ final class ParallelExecutor extends AbstractExecutor
                 break;
             }
 
+            /** @psalm-suppress ArgumentTypeCoercion */
             usleep((int)(1000000 / $this->refreshRate));
         }
     }
